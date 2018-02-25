@@ -1,0 +1,96 @@
+@import "~bulma/sass/utilities/_all";
+
+$navbar-font-family: 'Roboto Condensed', sans-serif;
+$navbar-item-hover-color: #fff;
+$roboto: 'Roboto';
+$logo-font-family: 'Anonymous Pro for Powerline';
+
+$grey: #6F6F6F;
+$light-grey: #F5F5F5;
+
+.is-circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.is-medium {
+  font-weight: 500;
+}
+
+.is-grey {
+  color: $grey;
+}
+
+.hover-black {
+  &:hover {
+    color: #000;
+  }
+}
+
+.is-bold {
+  font-weight: bold;
+}
+
+.is-borderless {
+  border: none;
+}
+
+.is-shadowless {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.is-underlineable {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    height: 2px;
+    width: 0;
+    background-color: $primary;
+    transition: width 0.15s;
+  }
+  &:before {
+    content: '';
+    top: 25px;
+    position: absolute;
+    right: 50%;
+    height: 2px;
+    width: 0;
+    background-color: $primary;
+    transition: width 0.15s;
+  }
+  &:hover {
+    &:after, &:before {
+      width: 50%;
+    }
+  }
+}
+
+.green-line {
+  &:before, &:after {
+    background-color: #6ADB9B;
+  }
+}
+
+.red-line {
+  &:before, &:after {
+    background-color: #D0021B;
+  }
+}
+
+.is-active {
+  &:before, &:after {
+    width: 50%;
+  }
+}
+
+.is-vertical-center {
+  display: flex;
+  align-items: center;
+}
