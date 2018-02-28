@@ -6,7 +6,11 @@
         <span class="popular has-text-black is-underlineable green-line" href="#">Популярные</span>
       </div>
       <div class="level-right">
-        <span class="new-topic has-text-black is-underlineable" href="#" @click="showNewTopicForm">Создать топик</span>
+        <router-link
+          :to="{ name: 'topic.new' }"
+          class="new-topic has-text-black is-underlineable">
+          Создать топик
+        </router-link>
       </div>
     </div>
 
