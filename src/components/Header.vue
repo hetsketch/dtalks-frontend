@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-transparent is-fixed-top has-bottom-shadow" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-start">
           <router-link to="/" class="navbar-item" href="/">
@@ -28,9 +28,6 @@
         </div>
       </div>
     </nav>
-    <div class="container">
-      <hr style="margin: 0;">
-    </div>
   </header>
 </template>
 
@@ -47,6 +44,12 @@
 </script>
 
 <style lang="scss" scoped>
+  .has-bottom-shadow {
+    -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.25);
+  }
+
   .navbar-item {
     font-family: $navbar-font-family;
     position: relative;
