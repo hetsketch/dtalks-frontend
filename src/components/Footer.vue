@@ -9,10 +9,10 @@
           <div class="socials">
             <ul>
               <li><a href="#" class="facebook has-text-centered">
-                <b-icon icon="facebook" type="is-white" size="is-small"></b-icon>
+                <b-icon pack="fab" icon="facebook-f" type="is-white" size="is-small"></b-icon>
               </a></li>
               <li><a href="#" class="vk has-text-centered">
-                <b-icon icon="vk" type="is-white" size="is-small"></b-icon>
+                <b-icon pack="fab" icon="vk" type="is-white" size="is-small" style="margin-top: 5px;"></b-icon>
               </a></li>
               <li><a href="#"><img src="/static/t_logo.png" alt="telegram"></a></li>
               <li><a href="#"><img src="/static/gl_logo.png" alt="gitlab"></a></li>

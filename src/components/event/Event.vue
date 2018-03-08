@@ -25,11 +25,11 @@
           <div class="column is-2">
             <ul class="event__meta">
               <li class="event__meta-item">
-                <b-icon icon="calendar" size="is-small"></b-icon>
+                <b-icon icon="calendar-alt" size="is-small"></b-icon>
                 <span class="event__meta-title">{{ moment(event.start_time).format('DD MMMM YYYY') }}</span>
               </li>
               <li class="event__meta-item">
-                <b-icon icon="clock-o" size="is-small"></b-icon>
+                <b-icon icon="clock" size="is-small"></b-icon>
                 <span class="event__meta-title">
                   {{ moment(event.start_time).format('HH.mm') }} — {{ moment(event.end_time).format('HH.mm') }}
                 </span>
@@ -44,7 +44,7 @@
                 <span class="event__meta-title">{{ event.address }}</span>
               </li>
               <li class="event__meta-item">
-                <b-icon icon="ruble" size="is-small"></b-icon>
+                <b-icon icon="ruble-sign" size="is-small"></b-icon>
                 <span class="event__meta-title" v-if="!event.free">{{ event.price }}</span>
                 <span class="event__meta-title" v-else>Бесплатно</span>
               </li>

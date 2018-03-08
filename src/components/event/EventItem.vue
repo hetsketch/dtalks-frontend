@@ -15,7 +15,7 @@
             <a class="location is-size-7">{{ event.city }}</a>
           </div>
           <div class="level-item">
-            <b-icon icon="ruble" size="is-small"></b-icon>
+            <b-icon icon="ruble-sign" size="is-small"></b-icon>
             <span class="price is-size-7">{{ event.free ? 'Бесплатно' : event.price }}</span>
           </div>
           <div class="level-item">
