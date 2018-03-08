@@ -5,6 +5,11 @@ $navbar-item-hover-color: #fff;
 $roboto: 'Roboto';
 $logo-font-family: 'Anonymous Pro for Powerline';
 
+$vk-color: #4c75a3;
+$google-color: #dd4b39;
+$fb-color: #3b5998;
+$tw-color: #1da1f2;
+$gh-color: #333;
 $grey: #6F6F6F;
 $light-grey: #F5F5F5;
 
@@ -93,4 +98,20 @@ $light-grey: #F5F5F5;
 .is-vertical-center {
   display: flex;
   align-items: center;
+}
+
+.has-tw-color, .has-tw-color:hover {
+  color: $tw-color;
+}
+
+.has-gh-color, .has-gh-color:hover {
+  color: $gh-color;
+}
+
+.has-fb-color, .has-fb-color:hover {
+  color: $fb-color;
+}
+
+.has-vk-color, .has-vk-color:hover {
+  color: $vk-color;
 }
