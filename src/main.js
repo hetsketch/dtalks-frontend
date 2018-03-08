@@ -8,6 +8,7 @@ import moment from 'moment'
 import YmapPlugin from 'vue-yandex-maps'
 import lodash from 'lodash'
 import { store } from './vuex/store'
+import Croppa from 'vue-croppa'
 
 import App from './App'
 import { routes } from "./routes";
@@ -48,6 +49,9 @@ Vue.prototype.$_ = lodash;
 
 //yandex maps
 Vue.use(YmapPlugin);
+
+//image cropper
+Vue.use(Croppa);
 
 Vue.config.productionTip = false;
 
