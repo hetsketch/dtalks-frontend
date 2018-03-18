@@ -9,6 +9,8 @@ import YmapPlugin from 'vue-yandex-maps'
 import lodash from 'lodash'
 import { store } from './vuex/store'
 import Croppa from 'vue-croppa'
+import infiniteScroll from 'vue-infinite-scroll'
+import autosize from 'autosize';
 
 import App from './App'
 import { routes } from "./routes";
@@ -37,7 +39,7 @@ Vue.prototype.$http = axios;
 //momentjs configuration
 moment.locale('ru');
 moment.updateLocale('ru', {
-  monthsShort : {
+  monthsShort: {
     format: 'янв_фев_мар_апр_мая_июня_июля_авг_сен_окт_ноя_дек'.split('_'),
     standalone: 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_')
   }
@@ -53,11 +55,21 @@ Vue.use(YmapPlugin);
 //image cropper
 Vue.use(Croppa);
 
+//load on scroll
+Vue.use(infiniteScroll);
+
 Vue.config.productionTip = false;
+
+//directives
+Vue.directive('autosize', {
+  inserted(el) {
+    autosize(el.getElementsByClassName('textarea')[0]);
+  }
+});
 
 new Vue({
   el: '#app',
-  components: {App},
+  components: { App },
   template: '<App/>',
   router,
   store

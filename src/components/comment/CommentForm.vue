@@ -27,7 +27,6 @@
 </template>
 
 <script>
-  import autosize from 'autosize';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -56,13 +55,6 @@
     },
     computed: {
       ...mapGetters(['authHeaders'])
-    },
-    directives: {
-      autosize: {
-        inserted(el) {
-          autosize(el.getElementsByClassName('textarea')[0]);
-        }
-      }
     },
     props: ['commentableId']
   }

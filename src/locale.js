@@ -27,8 +27,16 @@ const messages = {
   numeric: (field) => `Поле должно быть числом.`,
   regex: (field) => `Поле имеет ошибочный формат.`,
   required: (field) => `Поле обязательно для заполнения.`,
-  size: (field, [size]) => `Поле должно быть меньше, чем ${formatFileSize(size)}.`,
+  size: (field, [size]) => `Файл должен быть меньше, чем ${formatFileSize(size)}.`,
   url: (field) => `Поле имеет ошибочный формат URL.`
+};
+
+const formatFileSize = (size) => {
+  const units = ['Byte', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const threshold = 1024;
+  size = Number(size) * threshold;
+  const i = size === 0 ? 0 : Math.floor(Math.log(size) / Math.log(threshold));
+  return `${(size / Math.pow(threshold, i)).toFixed(2) * 1} ${units[i]}`;
 };
 
 const locale = {

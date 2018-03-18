@@ -11,7 +11,7 @@
           <router-link to="/discussions" class="navbar-item is-underlineable">Обсуждения</router-link>
           <router-link to="/events" class="navbar-item is-underlineable">События</router-link>
           <router-link to="/vacancies" class="navbar-item is-underlineable">Вакансии</router-link>
-          <router-link to="/companies" class="navbar-item is-underlineable">Компании</router-link>
+          <router-link :to="{ name: 'companies' }" class="navbar-item is-underlineable">Компании</router-link>
           <button class="button navbar-burger">
             <span></span>
             <span></span>

@@ -1,7 +1,7 @@
 {
   "name": "dtalks-frontend",
   "version": "1.0.0",
-  "description": "DTalks frontend",
+  "info": "DTalks frontend",
   "author": "Alex Koval <al3xander.koval@gmail.com>",
   "private": true,
   "scripts": {
@@ -23,6 +23,7 @@
     "vee-validate": "^2.0.4",
     "vue": "^2.5.2",
     "vue-croppa": "^1.2.1",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-quill-editor": "^3.0.5",
     "vue-router": "^3.0.1",
     "vue-yandex-maps": "^0.6.10",
