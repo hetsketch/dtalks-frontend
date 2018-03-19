@@ -9,6 +9,7 @@
     </div>
     <d-comment-form
       :commentableId="this.commentableId"
+      :commentable="commentable"
       @commentCreated="$emit('commentCreated')">
     </d-comment-form>
   </div>
@@ -38,7 +39,7 @@
       'd-comment-form': CommentForm,
       'd-comment-item': CommentItem
     },
-    props: ['comments', 'commentableId']
+    props: ['comments', 'commentableId', 'commentable']
   }
 </script>
 

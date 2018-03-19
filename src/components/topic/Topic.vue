@@ -41,6 +41,7 @@
     <d-comment-list
       :comments="topic.comments"
       :commentableId="topic.id"
+      commentable="topics"
       @commentCreated="fetchComments">
     </d-comment-list>
   </section>

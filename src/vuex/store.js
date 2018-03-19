@@ -9,12 +9,14 @@ Vue.use(Vuex);
 const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 const CURRENT_USER = 'CURRENT_USER';
 const LOGOUT = 'LOGOUT';
+const FETCH_USER_OS = 'FETCH_USER_OS'
 axios.defaults.baseURL = 'http://localhost:3000/v1';
 
 export const store = new Vuex.Store({
     state: {
       authHeaders: {},
-      currentUser: {}
+      currentUser: {},
+      userOS: ''
     },
     plugins: [createPersistedState({
       storage: {
@@ -37,6 +39,15 @@ export const store = new Vuex.Store({
       [LOGOUT](state) {
         state.currentUser = {};
         state.authHeaders = {};
+      },
+      [FETCH_USER_OS](state) {
+        let OSName = '';
+        if(navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+        if(navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+        if(navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+        if(navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
+
+        state.userOS = OSName;
       }
     },
     getters: {
@@ -45,6 +56,9 @@ export const store = new Vuex.Store({
       },
       currentUser(state) {
         return state.currentUser;
+      },
+      userOS(state) {
+        return state.userOS;
       }
     },
     actions: {
