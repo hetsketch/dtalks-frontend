@@ -41,7 +41,7 @@
     methods: {
       addComment() {
         this.isLoading = true;
-        this.$http.post(`/topics/${this.commentableId}/comments`, this.comment, { headers: this.authHeaders })
+        this.$http.post(`/${this.commentable}/${this.commentableId}/comments`, this.comment, { headers: this.authHeaders })
           .then(response => {
             this.$emit('commentCreated');
             this.isLoading = false;
@@ -56,7 +56,7 @@
     computed: {
       ...mapGetters(['authHeaders'])
     },
-    props: ['commentableId']
+    props: ['commentableId', 'commentable']
   }
 </script>
 

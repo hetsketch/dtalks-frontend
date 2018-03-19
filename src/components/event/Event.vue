@@ -69,8 +69,12 @@
               ></ymap-marker>
 
             </yandex-map>
-            <!--todo: add comments later-->
-            <!--<d-comment-list :comments="event.comments"></d-comment-list>-->
+            <d-comment-list
+              :comments="event.comments"
+              :commentableId="event.id"
+              commentable="events"
+              @commentCreated="fetchComments">
+            </d-comment-list>
           </div>
 
           <div class="column is-2">
@@ -89,7 +93,7 @@
               {{ showAllParticipants ? 'Скрыть' : 'Показать всех' }}
             </a>
             <button
-              v-if="!($store.state.currentUser.id == event.author.id)"
+              v-if="!(currentUser.id === event.author.id)"
               @click="addParticipant"
               class="event__go-button button is-fullwidth">
               Я пойду!
@@ -107,11 +111,16 @@
 </template>
 
 <script>
+  import CommentList from '../comment/CommentList';
+  import { mapGetters } from 'vuex';
+
   export default {
     data() {
       return {
         event: {
-          participants: []
+          participants: [],
+          comments: [],
+          author: {}
         },
         chunkedParticipants: [],
         showAllParticipants: false
@@ -141,9 +150,19 @@
       },
       inviteFriend() {
         //TODO: invitations
+      },
+      fetchComments() {
+        this.$http.get(`/events/${this.event.id}/comments`, { headers: this.authHeaders })
+          .then(response => {
+            this.event.comments = response.data.data.comments;
+          })
+          .catch(response => {
+            console.log('error');
+          });
       }
     },
     computed: {
+      ...mapGetters(['currentUser']),
       filteredParticipants: function() {
         if(this.showAllParticipants) {
           return this.chunkedParticipants;
@@ -159,6 +178,9 @@
     created() {
       this.fetchEvent(this.$route.params.id);
     },
+    components: {
+      'd-comment-list': CommentList
+    }
   }
 </script>
 
@@ -236,6 +258,10 @@
 
     &__invite-button {
       border: 2px solid #FABD29;
+    }
+
+    .comments {
+      margin-top: 15px;
     }
   }
 </style>
