@@ -2,7 +2,7 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-64x64">
-        <img src="../../assets/img.jpg" class="is-rounded" alt="">
+        <img :src="comment.author.avatar.thumbnail" class="is-rounded" alt="">
       </p>
     </figure>
     <div class="media-content">

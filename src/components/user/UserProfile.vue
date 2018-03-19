@@ -7,7 +7,7 @@
           <div class="columns">
             <div class="column is-3">
               <div class="user-profile__photo">
-                <img src="../../assets/img.jpg" alt="">
+                <img :src="user.avatar.original" alt="">
               </div>
             </div>
             <div class="column is-9">

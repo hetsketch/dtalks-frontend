@@ -2,7 +2,7 @@
   <article class="media company-item">
     <figure class="media-left">
       <p class="image is-96x96">
-        <img :src="company.thumb" class="company-item__company-logo">
+        <img :src="company.thuthumbnailmb" class="company-item__company-logo">
       </p>
     </figure>
     <div class="media-content">

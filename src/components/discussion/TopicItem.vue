@@ -4,7 +4,7 @@
       <div class="level">
         <div class="level-left">
           <figure class="image is-24x24">
-            <img src="../../assets/img.jpg" class="is-circle" alt="">
+            <img :src="topic.author.avatar.thumbnail" class="is-circle" alt="">
           </figure>
           <a class="author-fullname is-size-7" href="#">{{ topic.author.full_name }}</a>
         </div>
