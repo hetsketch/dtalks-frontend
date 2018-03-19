@@ -12,15 +12,18 @@
                  name="comment_text"
                  type="textarea"
                  v-model="comment.text"
-                 v-validate.disabled="'max:2000'"
+                 v-validate="'max:2000'"
                  maxlength="2000"
-                 placeholder="Написать комментарий..."
+                 placeholder="Напишите комментарий и нажмите ⌘ + Enter, чтобы отправить"
+                 @keydown.enter.native="addCommentByShortcut"
                  @blur="errors.clear()">
         </b-input>
       </b-field>
       <a @click="addComment"
          class="button is-info send-button"
-         :class="isLoading ? 'is-loading' : ''">Отправить
+         :class="isLoading ? 'is-loading' : ''"
+         :disabled="$_.isEmpty(comment.text)">
+        Отправить
       </a>
     </div>
   </article>
@@ -40,21 +43,35 @@
     },
     methods: {
       addComment() {
-        this.isLoading = true;
-        this.$http.post(`/${this.commentable}/${this.commentableId}/comments`, this.comment, { headers: this.authHeaders })
-          .then(response => {
-            this.$emit('commentCreated');
-            this.isLoading = false;
-            this.comment.text = '';
-            console.log('comment created');
-          })
-          .catch(response => {
-            console.log('error!');
-          });
+        if(this.comment.text.length > 0) {
+          this.isLoading = true;
+          this.$http.post(`/${this.commentable}/${this.commentableId}/comments`, this.comment, { headers: this.authHeaders })
+            .then(response => {
+              this.$emit('commentCreated');
+              this.isLoading = false;
+              this.comment.text = '';
+              console.log('comment created');
+            })
+            .catch(response => {
+              this.isLoading = false;
+              console.log('error!');
+            });
+        }
+      },
+      addCommentByShortcut(event) {
+        if(this.userOS === 'MacOS') {
+          if(event.metaKey) {
+            this.addComment();
+          }
+        } else {
+          if(event.ctrlKey) {
+            this.addComment();
+          }
+        }
       }
     },
     computed: {
-      ...mapGetters(['authHeaders'])
+      ...mapGetters(['authHeaders', 'userOS'])
     },
     props: ['commentableId', 'commentable']
   }
@@ -77,6 +94,7 @@
     .textarea {
       padding-bottom: 60px !important;
     }
+
     .control {
       padding: 2px;
     }

@@ -22,6 +22,9 @@
       'd-user-profile': UserProfile,
       'd-footer': Footer
     },
+    created() {
+      this.$store.commit('FETCH_USER_OS');
+    }
   }
 </script>
 
