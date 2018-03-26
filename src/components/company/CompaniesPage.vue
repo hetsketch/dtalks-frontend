@@ -13,11 +13,10 @@
             <div class="level">
               <div class="level-left">
                 <div class="level-item">
-                  <!--TODO: Add filtration-->
-                  <b-select size="is-small" placeholder="Сортировать" rounded>
-                    <option value="flint">По рейтингу</option>
-                    <option value="silver">По количеству сотрудников</option>
-                    <option value="silver">По количеству вакансий</option>
+                  <b-select size="is-small" placeholder="Сортировать" rounded v-model="orderBy">
+                    <option value="rating">По рейтингу</option>
+                    <option value="employees">По количеству сотрудников</option>
+                    <option value="vacancies">По количеству вакансий</option>
                   </b-select>
                 </div>
               </div>
@@ -57,12 +56,14 @@
       return {
         companies: [],
         searchQuery: '',
-        busy: false
+        busy: false,
+        orderBy: 'rating'
       }
     },
     methods: {
       fetchCompanies() {
-        this.$http.get('/companies')
+        let params = { order_by: this.orderBy };
+        this.$http.get('/companies', { params: params })
           .then(response => {
             this.companies = response.data.data;
           })
@@ -86,6 +87,11 @@
     },
     created() {
       this.fetchCompanies();
+    },
+    watch: {
+      orderBy() {
+        this.fetchCompanies();
+      }
     }
   }
 </script>
