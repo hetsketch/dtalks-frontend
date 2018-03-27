@@ -3,7 +3,6 @@
     <div class="container">
       <div class="columns">
         <div class="column is-8">
-          <!--TODO: Add search-->
           <b-input
             v-model="searchQuery"
             @keyup.native.enter="searchCompanies"
@@ -62,7 +61,7 @@
     },
     methods: {
       fetchCompanies() {
-        let params = { order_by: this.orderBy };
+        let params = { order_by: this.orderBy, q: this.searchQuery };
         this.$http.get('/companies', { params: params })
           .then(response => {
             this.companies = response.data.data;
@@ -72,7 +71,7 @@
           });
       },
       searchCompanies() {
-        console.log(this.searchQuery);
+        this.fetchCompanies();
       },
       loadMore() {
         this.busy = true;
