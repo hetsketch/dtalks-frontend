@@ -32,8 +32,9 @@ Vue.use(Buefy, {
   defaultContentElement: '#content'
 });
 
+const isProd = process.env.NODE_ENV === 'production';
 //add axios as default $http vue method
-axios.defaults.baseURL = 'http://localhost:3000/v1';
+axios.defaults.baseURL = isProd ? 'https://dtalks-api.herokuapp.com/v1' : 'http://localhost:3000/v1';
 Vue.prototype.$http = axios;
 
 //momentjs configuration

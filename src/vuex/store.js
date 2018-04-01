@@ -10,7 +10,8 @@ const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 const CURRENT_USER = 'CURRENT_USER';
 const LOGOUT = 'LOGOUT';
 const FETCH_USER_OS = 'FETCH_USER_OS'
-axios.defaults.baseURL = 'http://localhost:3000/v1';
+const isProd = process.env.NODE_ENV === 'production';
+axios.defaults.baseURL = isProd ? 'https://dtalks-api.herokuapp.com/v1' : 'http://localhost:3000/v1';
 
 export const store = new Vuex.Store({
     state: {
