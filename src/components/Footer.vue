@@ -66,7 +66,6 @@
   }
   .footer {
     padding: 1.5rem 1.5rem 1rem;
-    margin-top: 1.5rem;
     background-color: #353535;
 
     li {

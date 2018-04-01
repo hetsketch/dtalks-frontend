@@ -58,4 +58,14 @@
   // Import Bulma and Buefy styles
   @import "~bulma";
   @import "~buefy/src/scss/buefy";
+
+  #app {
+    display: flex;
+    min-height: calc(100vh - 72px);
+    flex-direction: column;
+  }
+
+  header + * {
+    flex: 1;
+  }
 </style>
