@@ -149,7 +149,8 @@
     data() {
       return {
         user: {
-          company: {}
+          company: {},
+          avatar: {}
         },
         activeTab: 0
       }

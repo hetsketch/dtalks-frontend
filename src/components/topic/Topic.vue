@@ -5,7 +5,7 @@
         <div class="level">
           <div class="level-left">
             <figure class="image is-24x24">
-              <img :src="user.avatar.thumbnail" class="is-circle" alt="">
+              <img :src="topic.author.avatar.thumbnail" class="is-circle" alt="">
             </figure>
             <router-link :to="{name: 'currentUser', params: { id: topic.author.username }}"
                          class="author-fullname is-size-6 has-text-black is-medium">{{ topic.author.full_name }}
@@ -58,7 +58,9 @@
       return {
         topic: {
           comments: [],
-          author: {}
+          author: {
+            avatar: {}
+          }
         }
       }
     },
