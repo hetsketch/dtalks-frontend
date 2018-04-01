@@ -27,6 +27,9 @@ TMP="tmp"
 echo "remove tmp directory created previously"
 rm -rf $TMP
 
+echo "build project"
+npm run build
+
 # mv all the files needed to run the app to a `tmp` directory
 echo "create a tmp directory and copy all the files there"
 rsync -avz --include 'manifest.*.js' --exclude '*.js' --exclude '*.css' --exclude '*.map'  dist tmp
