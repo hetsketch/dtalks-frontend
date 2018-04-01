@@ -54,10 +54,13 @@
                   </b-icon>
                   <span class="user-profile__position"
                         v-if="user.position">
-                    {{ user.position }} в
+                    {{ user.position }}
                   </span>
-                  <router-link :to="{ name: 'company.show', params: { id: user.company.id } }"> {{ user.company.name
-                    }}
+                  <router-link
+                    v-if="!$_.isEmpty(user.company)"
+                    :to="{ name: 'company.show', params: { id: user.company.id } }">
+                    <span class="has-text-grey-dark">в</span>
+                    {{ user.company.name }}
                   </router-link>
                 </div>
                 <p class="user-profile__user-bio">
@@ -106,13 +109,21 @@
                     class="user-profile__tab-info has-text-centered"
                     v-if="$_.isEmpty(user.topics)">
                     <p class="is-size-5">Вы не создали еще ни одного топика, но можете сделать это прямо сейчас!</p>
-                    <router-link :to="{ name: 'topic.new' }" class="button">Создать</router-link>
+                    <router-link
+                      :to="{ name: 'topic.new' }"
+                      class="button">
+                      Создать
+                    </router-link>
                   </div>
                   <div
                     class="box user-profile__topic-item"
                     v-else
                     v-for="topic in user.topics">
-                    <router-link :to="{ name: 'topicPage', params: { id: topic.id } }" class="is-size-5">{{ topic.title }}</router-link>
+                    <router-link
+                      :to="{ name: 'topicPage', params: { id: topic.id } }"
+                      class="is-size-5">
+                      {{ topic.title }}
+                    </router-link>
                   </div>
                 </b-tab-item>
 
@@ -130,7 +141,11 @@
                     class="box user-profile__topic-item"
                     v-else
                     v-for="event in user.events">
-                    <router-link :to="{name: 'showEvent', params:{ id: event.id }}" class="is-size-5">{{ event.title }}</router-link>
+                    <router-link
+                      :to="{name: 'showEvent', params:{ id: event.id }}"
+                      class="is-size-5">
+                      {{ event.title }}
+                    </router-link>
                   </div>
                 </b-tab-item>
               </b-tabs>
