@@ -62,6 +62,7 @@
 
 <style lang="scss" scoped>
   footer {
+    margin-top: 1.5rem;
     background-color: #353535
   }
   .footer {
