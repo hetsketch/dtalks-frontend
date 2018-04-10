@@ -33,11 +33,11 @@
           <div class="companies__companies-list">
             <d-company-item v-for="company in companies" :key="company.id" :company="company"></d-company-item>
           </div>
-          <!--TODO: Add async loading-->
           <div v-infinite-scroll="loadMore"
                infinite-scroll-disabled="busy"
-               infinite-scroll-distance="10">
-            <p class="has-text-centered" v-if="busy">Загрузка...</p>
+               infinite-scroll-distance="10"
+               infinite-scroll-immediate-check="false">
+            <p class="has-text-centered load is-loading" v-if="busy"></p>
           </div>
         </div>
         <div class="column is-4">
@@ -56,40 +56,58 @@
         companies: [],
         searchQuery: '',
         busy: false,
-        orderBy: 'rating'
+        orderBy: 'rating',
+        page: 1,
+        totalPages: 1
       }
     },
     methods: {
       fetchCompanies() {
-        let params = { order_by: this.orderBy, q: this.searchQuery };
-        this.$http.get('/companies', { params: params })
-          .then(response => {
-            this.companies = response.data.data;
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        return new Promise((resolve, reject) => {
+          let params = { order_by: this.orderBy, q: this.searchQuery, page: this.page };
+          this.$http.get('/companies', { params: params })
+            .then(response => {
+              resolve(response.data.data);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        });
       },
       searchCompanies() {
-        this.fetchCompanies();
+        this.page = 1;
+        this.fetchCompanies().then(data => {
+          this.companies = data.companies;
+          this.totalPages = data.total_pages;
+        });
       },
       loadMore() {
-        this.busy = true;
-
-        setTimeout(() => {
-          this.busy = false;
-        }, 1000);
+        if(this.page < this.totalPages) {
+          this.busy = true;
+          this.page++;
+          this.fetchCompanies().then((data) => {
+            this.companies = this.companies.concat(data.companies);
+            this.busy = false;
+          });
+        }
       }
     },
     components: {
       'd-company-item': CompanyItem
     },
     created() {
-      this.fetchCompanies();
+      this.fetchCompanies().then(data => {
+        this.companies = data.companies;
+        this.totalPages = data.total_pages;
+      });
     },
     watch: {
       orderBy() {
-        this.fetchCompanies();
+        this.page = 1;
+        this.fetchCompanies().then(data => {
+          this.companies = data.companies;
+          this.totalPages = data.total_pages;
+        });
       }
     }
   }
@@ -105,6 +123,23 @@
 
     &__companies-list {
       margin-top: 35px;
+    }
+
+    .load {
+      &.is-loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.5;
+        &:after {
+          @include loader;
+          position: absolute;
+          top: calc(50% - 1em);
+          left: calc(50% - 1em);
+          width: 2em;
+          height: 2em;
+          border-width: 0.25em;
+        }
+      }
     }
   }
 </style>
