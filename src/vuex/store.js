@@ -9,7 +9,11 @@ Vue.use(Vuex);
 const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 const CURRENT_USER = 'CURRENT_USER';
 const LOGOUT = 'LOGOUT';
-const FETCH_USER_OS = 'FETCH_USER_OS'
+const FETCH_USER_OS = 'FETCH_USER_OS';
+const ONLINE_USERS = 'ONLINE_USERS';
+const ADD_ONLINE_USER = 'ADD_ONLINE_USER';
+const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
+
 const isProd = process.env.NODE_ENV === 'production';
 axios.defaults.baseURL = isProd ? 'https://dtalks-api.herokuapp.com/v1' : 'http://localhost:3000/v1';
 
@@ -17,7 +21,9 @@ export const store = new Vuex.Store({
     state: {
       authHeaders: {},
       currentUser: {},
-      userOS: ''
+      userOS: '',
+      onlineUsers: [],
+      loginModal: false
     },
     plugins: [createPersistedState({
       storage: {
@@ -49,6 +55,15 @@ export const store = new Vuex.Store({
         if(navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
 
         state.userOS = OSName;
+      },
+      [ONLINE_USERS](state, payload) {
+        state.onlineUsers = payload;
+      },
+      [ADD_ONLINE_USER](state, payload) {
+        state.onlineUsers.push((payload));
+      },
+      [TOGGLE_LOGIN_MODAL](state) {
+        state.loginModal = !state.loginModal;
       }
     },
     getters: {
@@ -60,6 +75,12 @@ export const store = new Vuex.Store({
       },
       userOS(state) {
         return state.userOS;
+      },
+      onlineUsers(state) {
+        return state.onlineUsers;
+      },
+      loginModal(state) {
+        return state.loginModal;
       }
     },
     actions: {
@@ -92,7 +113,7 @@ export const store = new Vuex.Store({
           .catch(response => {
             console.log('error in logout');
           })
-      }
+      },
     }
   })
 ;
