@@ -1,44 +1,46 @@
 <template>
   <div class="login-modal">
     <h2 class="is-size-4 has-text-centered has-text-black">Регистрация</h2>
-    <b-field>
-      <b-input
-        v-model="user.username"
-        placeholder="Ник"
-      >
-      </b-input>
-    </b-field>
+    <form @submit.prevent="signup">
+      <b-field>
+        <b-input
+          v-model="user.username"
+          placeholder="Ник"
+        >
+        </b-input>
+      </b-field>
 
-    <b-field>
-      <b-input
-        type="email"
-        v-model="user.email"
-        placeholder="Email"
-      >
-      </b-input>
-    </b-field>
+      <b-field>
+        <b-input
+          type="email"
+          v-model="user.email"
+          placeholder="Email"
+        >
+        </b-input>
+      </b-field>
 
-    <b-field>
-      <b-input
-        type="password"
-        v-model="user.password"
-        password-reveal
-        placeholder="Пароль"
-      >
-      </b-input>
-    </b-field>
+      <b-field>
+        <b-input
+          type="password"
+          v-model="user.password"
+          password-reveal
+          placeholder="Пароль"
+        >
+        </b-input>
+      </b-field>
 
-    <b-field>
-      <b-input
-        type="password"
-        v-model="user.password_confirmation"
-        password-reveal
-        placeholder="Подтверждение пароля"
-      >
-      </b-input>
-    </b-field>
-    <a href="#" @click="switchToLogin">Войти</a>
-    <button class="button is-info is-fullwidth" @click="signup()">Зарегистрироваться</button>
+      <b-field>
+        <b-input
+          type="password"
+          v-model="user.password_confirmation"
+          password-reveal
+          placeholder="Подтверждение пароля"
+        >
+        </b-input>
+      </b-field>
+      <a href="#" @click="switchToLogin">Войти</a>
+      <button class="button is-info is-fullwidth" type="submit">Зарегистрироваться</button>
+    </form>
   </div>
 </template>
 

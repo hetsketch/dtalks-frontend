@@ -2,30 +2,32 @@
   <div class="login-modal">
     <h2 class="is-size-4 has-text-centered">Войти с помощью</h2>
     <d-socials></d-socials>
-    <div class="fields">
-      <b-field>
-        <b-input
-          type="email"
-          v-model="credentials.email"
-          placeholder="Email или Ник">
-        </b-input>
-      </b-field>
+    <form @submit.prevent="signin">
+      <div class="fields">
+        <b-field>
+          <b-input
+            type="email"
+            v-model="credentials.email"
+            placeholder="Email или Ник">
+          </b-input>
+        </b-field>
 
-      <b-field>
-        <b-input
-          type="password"
-          v-model="credentials.password"
-          password-reveal
-          placeholder="Пароль">
-        </b-input>
-      </b-field>
+        <b-field>
+          <b-input
+            type="password"
+            v-model="credentials.password"
+            password-reveal
+            placeholder="Пароль">
+          </b-input>
+        </b-field>
 
-      <b-checkbox v-model="remember">Запомнить меня</b-checkbox>
-      <a class="is-pulled-right is-small" href="#">Забыли пароль?</a>
-      <br><br>
-      <a href="#" @click="switchToSignup">Регистрация</a>
-      <a class="button is-info is-fullwidth" @click="signin">Войти</a>
-    </div>
+        <b-checkbox v-model="remember">Запомнить меня</b-checkbox>
+        <a class="is-pulled-right is-small" href="#">Забыли пароль?</a>
+        <br><br>
+        <a href="#" @click="switchToSignup">Регистрация</a>
+        <button class="button is-info is-fullwidth" type="submit">Войти</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -48,9 +50,8 @@
         this.$emit('switchToSignup');
       },
       signin() {
-        const self = this;
         this.$store.dispatch('signin', this.credentials).then(() => {
-          self.$parent.close();
+          this.$store.commit('TOGGLE_LOGIN_MODAL')
         });
       }
     },
