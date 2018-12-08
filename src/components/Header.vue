@@ -19,12 +19,12 @@
           </button>
         </div>
         <div class="navbar-end">
-          <a class="navbar-item">
+          <div class="navbar-item">
             <d-search-form label="Поиск" placeholder="Что ищем?"></d-search-form>
-          </a>
-          <a class="navbar-item">
+          </div>
+          <div class="navbar-item">
             <d-login></d-login>
-          </a>
+          </div>
         </div>
       </div>
     </nav>
@@ -66,6 +66,7 @@
       background-color: #4A90E2;
       transition: width 0.15s;
     }
+
     &:before {
       content: '';
       top: 47px;
@@ -76,6 +77,7 @@
       background-color: #4A90E2;
       transition: width 0.15s;
     }
+
     &:hover {
       &:after, &:before {
         width: calc(50% - 1rem);
@@ -85,6 +87,7 @@
 
   .logo {
     position: relative;
+
     &:after {
       content: '';
       display: block;
