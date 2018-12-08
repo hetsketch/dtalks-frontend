@@ -4,6 +4,7 @@
       class="link-text"
       v-if="!$_.isEmpty($store.state.currentUser)">
       <span slot="trigger">
+        <span class="login__status login__status--green"></span>
         <span class="login__username">{{ $store.state.currentUser.username }}</span>
         <b-icon icon="chevron-down" size="is-small"></b-icon>
       </span>
@@ -24,13 +25,15 @@
 
       <b-dropdown-item>
         <router-link
-          :to="{ name: 'user.preferences', params: { id: currentUser.id }}"
+          :to="{ name: 'users' }"
           class="has-text-black">
           <b-icon
-            icon="cog"
-            size="is-small">
+            pack="far"
+            icon="user"
+            size="is-small"
+            custom-class="regular">
           </b-icon>
-          Настройки
+          Список пользователей
         </router-link>
       </b-dropdown-item>
 
@@ -44,11 +47,11 @@
       </b-dropdown-item>
     </b-dropdown>
 
-    <div v-else>
-        <b-icon icon="sign-in-alt"></b-icon>
-      <span class="link-text" @click="isComponentModalActive = true">Войти</span>
-    </div>
-    <b-modal :active.sync="isComponentModalActive">
+    <a class="has-text-black" @click="$store.commit('TOGGLE_LOGIN_MODAL')" v-else>
+      <b-icon icon="sign-in-alt"></b-icon>
+      <span class="link-text">Войти</span>
+    </a>
+    <b-modal :active="loginModal" :onCancel="() => {$store.commit('TOGGLE_LOGIN_MODAL')}">
       <d-login-form v-if="showLoginForm" @switchToSignup="toggleForm"></d-login-form>
       <d-signup-form v-else="showLoginForm" @switchToLogin="toggleForm"></d-signup-form>
     </b-modal>
@@ -63,13 +66,11 @@
   export default {
     data() {
       return {
-        isComponentModalActive: false,
         showLoginForm: true
       }
     },
     computed: {
-
-      ...mapGetters(['currentUser'])
+      ...mapGetters(['currentUser', 'loginModal']),
     },
     methods: {
       toggleForm() {
@@ -87,6 +88,7 @@
   .login {
     .link-text {
       margin-left: 8px;
+      cursor: pointer;
     }
 
     .modal-content {
@@ -105,6 +107,18 @@
       -moz-user-select: none; /* mozilla browsers */
       -khtml-user-select: none; /* webkit (konqueror) browsers */
       -ms-user-select: none; /* IE10+ */
+    }
+
+    &__status {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 1px solid $light-grey;
+      border-radius: 50%;
+
+      &--green {
+        background-color: $green;
+      }
     }
   }
 </style>
