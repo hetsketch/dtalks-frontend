@@ -8,10 +8,10 @@
       @keyup.native.enter="search"
       v-model="query"
       placeholder="Что ищем?"/>
-    <div v-if="!isActive" @click="showSearchField">
+    <a v-if="!isActive" class="has-text-black" @click="showSearchField">
       <b-icon icon="search" type="is-black" size="is-small"></b-icon>
       <span class="search-text">{{ label }}</span>
-    </div>
+    </a>
   </div>
 </template>
 
