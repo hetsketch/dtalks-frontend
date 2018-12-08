@@ -23,7 +23,14 @@
       'd-footer': Footer
     },
     created() {
+      // TODO: extract it to some method or smth
+      let that = this;
       this.$store.commit('FETCH_USER_OS');
+      this.$cable.subscriptions.create("AppearanceChannel", {
+        received(onlineUsers) {
+          that.$store.commit('ONLINE_USERS', onlineUsers);
+        }
+      });
     }
   }
 </script>

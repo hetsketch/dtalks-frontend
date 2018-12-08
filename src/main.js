@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import VeeValidate, { Validator } from 'vee-validate';
 import locale from './locale'
 import axios from 'axios'
@@ -11,20 +10,18 @@ import { store } from './vuex/store'
 import Croppa from 'vue-croppa'
 import infiniteScroll from 'vue-infinite-scroll'
 import autosize from 'autosize';
+import ActionCable from 'actioncable-modules';
+
+let webSocketProtocol = process.env.NODE_ENV === 'production' ? 'wss' : 'ws';
+let socketHost = process.env.NODE_ENV === 'production' ? process.env.SOCKET_HOST : 'localhost';
+let socketPort = process.env.NODE_ENV === 'production' ? process.env.SOCKET_PORT : 3000;
+const cable = ActionCable.createConsumer(`${webSocketProtocol}://${socketHost}:${socketPort}/cable`);
 
 import App from './App'
-import { routes } from "./routes";
-
-Vue.use(VueRouter);
+import router from './router'
 
 Validator.localize('ru', locale);
 Vue.use(VeeValidate);
-
-//add router
-const router = new VueRouter({
-  routes,
-  mode: 'history'
-});
 
 //add buefy
 Vue.use(Buefy, {
@@ -46,6 +43,9 @@ moment.updateLocale('ru', {
   }
 });
 Vue.prototype.moment = moment;
+
+//actioncable
+Vue.prototype.$cable = cable;
 
 //lodash
 Vue.prototype.$_ = lodash;
